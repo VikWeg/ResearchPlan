@@ -138,6 +138,10 @@ Goals of the Thesis min 1
 research questions, methods, contributions
 \end_layout
 
+\begin_layout Standard
+state general goals first, work down from there (layering)
+\end_layout
+
 \begin_layout Section*
 Detailed Work Plan min 0.5
 \end_layout
@@ -176,7 +180,7 @@ from state of the art section, key papers
 \end_layout
 
 \begin_layout Standard
-* tracking papers (global + others) behrens
+* tracking papers (global + others) behrens, multidirectional?
 \end_layout
 
 \begin_layout Standard
@@ -197,6 +201,10 @@ from state of the art section, key papers
 
 \begin_layout Standard
 * ASC papers
+\end_layout
+
+\begin_layout Standard
+*references from nico
 \end_layout
 
 \begin_layout Section*
