@@ -11,7 +11,8 @@ cortex_mask = imdilate(cortex_mask,strel('disk',2));
 
 cortex_edge = edge(cortex_mask,'Canny');
 cortex_edge_dilated = imdilate(cortex_edge,strel('disk',2));
-cortex_filtered = imgaussfilt(cortex_mask,2);
+% cortex_filtered = imgaussfilt(cortex_mask,2);
+cortex_filtered = imfilter(cortex_mask,fspecial('gaussian'));
 cortex_mask(cortex_edge_dilated) = cortex_filtered(cortex_edge_dilated);
 
 cortex_bw = cortex_mask > 0;
@@ -41,15 +42,75 @@ cables_filling(logical(background)) = 0;
 cables_filling(logical(cortex_bw)) = 0;
 cables_filling = color_mask(cables_filling,1,1,1);
 
-cables_edge = color_mask(cables_edge_mask,0.25,0.25,0.25);
+cables_edge = color_mask(cables_edge_mask,170/255,56/255,50/255);
 
 
 brain = color_mask(cortex_mask,198/255,56/255,32/255);
 
-subplot(1,2,1)
-imshow(brain + background_color + repmat(wm,[1 1 3]))
-subplot(1,2,2)
-imshow(brain + cables_edge + cables_filling + background_color)
+% subplot(1,2,1)
+% imshow(brain + background_color + repmat(wm,[1 1 3]))
+% subplot(1,2,2)
+% imshow(brain + cables_edge + cables_filling + background_color)
 
 imwrite(brain + cables_edge + cables_filling + background_color,'cables.png')
 imwrite(brain + background_color + repmat(wm,[1 1 3]),'cortex.png')
+
+N=40;
+n=3;
+nn=1;
+
+box = (-1)*ones(N+2*n);
+box(nn+1:N+2*n-nn,nn+1:N+2*n-nn) = 1;
+box(n+1:N+n,n+1:N+n) = 0;
+
+mask = cortex_bw + wm;
+grid = zeros(size(cortex_bw));
+i=n+1;
+while i+N-1 < size(cortex_bw,1)
+   j=n+1;
+   while j+N-1 < size(cortex_bw,2)
+    if sum(sum(mask(i:i+N-1,j:j+N-1))) > 0
+       grid(i-n:i+N+n-1,j-n:j+N+n-1) = box;
+       
+       if sum(sum(mask(i-N-2*n:i-2*n-1,j:j+N-1))) == 0
+           grid(i-n-1,j-n:j+N+n-1) = -1;
+       end
+       
+       if sum(sum(mask(i+N+2*n:i+2*N+2*n-1,j:j+N-1))) == 0
+           grid(i+N+1,j-n:j+N+n-1) = -1;
+       end
+       
+       if sum(sum(mask(i:i+N-1,j+N+2*n:j+2*N+2*n-1))) == 0
+       grid(i-n-1:i+N+n-1,j+N+n) = -1;
+       end
+       
+       if sum(sum(mask(i:i+N-1,j-N-2*n:j-2*n-1))) == 0
+       grid(i-n-1:i+N+n-1,j-n-1) = -1;
+       end
+       
+    end
+    j = j + N + 2*n;   
+   end
+    i = i + N + 2*n;
+end
+
+t=10;
+grid = [grid(:,t:end) grid(:,1:t-1)];
+
+grid = repmat(grid,[1 1 3]);
+
+imshow(brain + cables_edge + cables_filling + background_color + grid)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
