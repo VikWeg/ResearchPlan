@@ -99,8 +99,38 @@ grid = [grid(:,t:end) grid(:,1:t-1)];
 
 grid = repmat(grid,[1 1 3]);
 
-imshow(brain + cables_edge + cables_filling + background_color + grid)
+imwrite(brain + cables_edge + cables_filling + background_color + grid,'grid.png')
 
+%%
+
+% [V,D] = eig(double(cables_edge_mask(200:250,200:250)));
+% 
+% t = linspace(0,2*pi);
+% plot(cos(t),sin(t + pi/6))
+
+im=cables_edge_mask(200:250,200:250);
+
+% coo = im2coo(im);
+% 
+% subplot(1,2,1)
+% plot(coo( logical(coo(:,3)),1),coo( logical(coo(:,3)),2),'x',...
+%      coo(~logical(coo(:,3)),1),coo(~logical(coo(:,3)),2),'o')
+% % subplot(1,2,2)
+% % imshow(im)
+% 
+% [U,S,V] = svd(coo(logical(coo(:,3)),1:2));
+% 
+% t = linspace(0,2*pi);
+% 
+% ell_coo = [S(1,1)*cos(t)', S(2,2)*sin(t + asin(V(2,1)))'];
+% 
+subplot(1,2,1)
+imshow(im)
+% ell_im = coo2im(ell_coo ,200,200);
+
+
+subplot(1,2,2)
+imshow(im2ell(im))
 
 
 
