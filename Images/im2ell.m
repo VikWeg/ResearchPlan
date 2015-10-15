@@ -13,4 +13,6 @@ ell_coo = [sqrt(S(1,1))*cos(t)', sqrt(S(2,2))*sin(t + asin(V(2,1)))'];
 
 ell = coo2im(ell_coo,nx,ny);
 
+ell = ell(1:nx,1:ny);
+
 end

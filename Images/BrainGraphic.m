@@ -94,43 +94,71 @@ while i+N-1 < size(cortex_bw,1)
     i = i + N + 2*n;
 end
 
-t=10;
-grid = [grid(:,t:end) grid(:,1:t-1)];
+% t=10;
+% grid = [grid(:,t:end) grid(:,1:t-1)];
 
 grid = repmat(grid,[1 1 3]);
 
 imwrite(brain + cables_edge + cables_filling + background_color + grid,'grid.png')
 
 %%
-
-% [V,D] = eig(double(cables_edge_mask(200:250,200:250)));
-% 
-% t = linspace(0,2*pi);
-% plot(cos(t),sin(t + pi/6))
-
 im=cables_edge_mask(200:250,200:250);
 
-% coo = im2coo(im);
-% 
-% subplot(1,2,1)
-% plot(coo( logical(coo(:,3)),1),coo( logical(coo(:,3)),2),'x',...
-%      coo(~logical(coo(:,3)),1),coo(~logical(coo(:,3)),2),'o')
-% % subplot(1,2,2)
-% % imshow(im)
-% 
-% [U,S,V] = svd(coo(logical(coo(:,3)),1:2));
-% 
-% t = linspace(0,2*pi);
-% 
-% ell_coo = [S(1,1)*cos(t)', S(2,2)*sin(t + asin(V(2,1)))'];
-% 
 subplot(1,2,1)
 imshow(im)
-% ell_im = coo2im(ell_coo ,200,200);
-
-
 subplot(1,2,2)
 imshow(im2ell(im))
+
+%%
+
+img = im2double(cortex_bw + cables_edge_mask);
+
+ell_grid = zeros(size(cortex_bw));
+
+ellipses = cell(1,9);
+
+t = linspace(0,2*pi);
+ell_coo = [cos(t)', sin(t)'];
+ellipses{1} = coo2im(ell_coo,N,N);
+imshow(ellipses{1})
+
+a=1.5;b=1;
+for d = 0:7
+    phi = d*pi/8;
+    ell_coo = [a*cos(phi)*cos(t)' - b*sin(phi)*sin(t)', a*sin(phi)*cos(t)' + b*cos(phi)*sin(t)'];
+    subplot(3,3,d+1)
+%     plot(ell_coo(:,1),ell_coo(:,2))
+%     axis([-3 3 -3 3])
+    ellipses{d+2} = coo2im(ell_coo,N,N);
+    imshow(ellipses{d+2})
+end
+
+% 
+% i=n+1;
+% while i+N-1 < size(cortex_bw,1)
+%    j=n+1;
+%    while j+N-1 < size(cortex_bw,2)
+%     if sum(sum(double(cortex_bw(i:i+N-1,j:j+N-1) + cables_edge_mask(i:i+N-1,j:j+N-1)))) > 0
+%         
+%         dir = zeros(1,4);
+%         for d = 0:3
+%         img_rot = imrotate(img,d*pi/4);
+%         block = img_rot(i:i+N-1,j:j+N-1);
+%         dir(1,i) = sum(sum(edge(block,'Prewitt',0.1,'horizontal')));
+%         end
+%         dir = dir/sum(dir);
+% %        ell_grid(i:i+N-1,j:j+N-1) = im2ell(im2double(cortex_bw(i:i+N-1,j:j+N-1) + cables_edge_mask(i:i+N-1,j:j+N-1)));   
+%      
+%        
+%     end
+%     j = j + N + 2*n;   
+%    end
+%     i = i + N + 2*n;
+% end
+% 
+% % ell_grid = [ell_grid(:,t:end) ell_grid(:,1:t-1)];
+% 
+% imshow(repmat(-0.5*ell_grid,[1 1 3]) + brain + cables_edge + cables_filling + background_color + grid)
 
 
 
