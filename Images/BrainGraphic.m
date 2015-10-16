@@ -111,26 +111,81 @@ imshow(im2ell(im))
 
 %%
 
-img = im2double(cortex_bw + cables_edge_mask);
+% img = im2double(cortex_bw + cables_edge_mask);
+% 
+% ell_grid = zeros(size(cortex_bw));
+% 
+% ellipses = cell(1,9);
 
-ell_grid = zeros(size(cortex_bw));
+% t = linspace(0,2*pi);
+% ell_coo = [cos(t)', sin(t)'];
+% ellipses{1} = coo2im(ell_coo,N,N);
+% imshow(ellipses{1})
 
-ellipses = cell(1,9);
+% a=1.5;b=1;
+% for d = 0:7
+%     phi = d*pi/8;
+%     ell_coo = [a*cos(phi)*cos(t)' - b*sin(phi)*sin(t)', a*sin(phi)*cos(t)' + b*cos(phi)*sin(t)'];
+%     subplot(3,3,d+1)
+% %     plot(ell_coo(:,1),ell_coo(:,2))
+% %     axis([-3 3 -3 3])
+%     ellipses{d+2} = coo2im(ell_coo,N,N);
+%     imshow(ellipses{d+2})
+% end
 
-t = linspace(0,2*pi);
-ell_coo = [cos(t)', sin(t)'];
-ellipses{1} = coo2im(ell_coo,N,N);
-imshow(ellipses{1})
+base_ellipse = cell(1,3);
 
-a=1.5;b=1;
-for d = 0:7
-    phi = d*pi/8;
-    ell_coo = [a*cos(phi)*cos(t)' - b*sin(phi)*sin(t)', a*sin(phi)*cos(t)' + b*cos(phi)*sin(t)'];
-    subplot(3,3,d+1)
-%     plot(ell_coo(:,1),ell_coo(:,2))
-%     axis([-3 3 -3 3])
-    ellipses{d+2} = coo2im(ell_coo,N,N);
-    imshow(ellipses{d+2})
+for i=1:3
+    base_ellipse{i} = zeros(N);
+end
+
+
+for e = 1:3
+    
+for i=1:N
+    for j=1:N
+        if abs((N-i+1 - N/2)^2/(10-(e-1)*3)^2 + (j-N/2)^2/(10+(e-1)*3)^2 - 1) <= 0.05 + (e-1)^1.5*0.05
+            base_ellipse{e}(i,j)=1;
+        end
+    end
+end
+
+base_ellipse{e} = imdilate(base_ellipse{e},strel('disk',1));
+
+subplot(1,3,e)
+imshow(base_ellipse{e})
+
+end
+
+rot_ell = cell(1,2*8+1);
+
+rot_ell{1} = base_ellipse{1};
+
+
+for k=1:2
+for r=0:7   
+    rot_ell{(k-1)*8 + r + 2} = imrotate(base_ellipse{k+1},r*180/8,'nearest','crop');
+end
+end
+
+% for i=1:2*8+1
+% rot_ell{i}=imdilate(rot_ell{i},strel('disk',1));
+% rot_ell{i}=imerode(rot_ell{i},strel('disk',1));
+% end
+
+% for i=1:2*8+1
+% subplot(3,8,i)
+% imshow(rot_ell{i})
+% end
+
+ell_hist = cell(1,2*8 + 1);
+
+for r = 1:2*8+1
+    [~,gdir] = imgradient(rot_ell{r});
+    ell_hist{r} = histogram( reshape(gdir(gdir~=0),1,numel(gdir(gdir~=0))) );
+    subplot(3,8,r)
+    ell_hist{r};
+%     imagesc(gdir)
 end
 
 % 

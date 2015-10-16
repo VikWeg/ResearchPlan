@@ -1,0 +1,207 @@
+%%%%%%% Comments
+%\newcommand{\gabriel}[1]{\textcolor{green}{\textbf{Gabriel: }{\footnotesize #1}}}
+\newcommand{\gabriel}[1]{}
+\newcommand{\brian}[1]{\textcolor{red}{\textbf{Brian: }{\footnotesize #1}}}
+\newcommand{\mario}[1]{\textcolor{blue}{\textbf{Mario: }{\footnotesize #1}}}
+% \newcommand{\mario}[1]{}
+
+
+\newcommand{\titleName}{Fast and Robust Least Squares Estimation in Corrupted Linear Models}
+
+\newcommand{\cov}{\text{Cov}}
+
+\newcommand{\bE}{{\mathbb E}}
+\newcommand{\bEhat}{\widehat{{\mathbb E}}}
+
+
+\newcommand{\bR}{{\mathbb R}}
+\newcommand{\cF}{{\mathcal F}}
+\newcommand{\risk}{{\mathbf R}}
+\newcommand{\cks}{\texttt{cks}\xspace}
+
+\newcommand{\cksny}{\texttt{XNV}\xspace}
+\newcommand{\cksrff}{\texttt{XKS}\xspace}
+\newcommand{\rff}{\texttt{RFF}\xspace}
+\newcommand{\rffm}{\texttt{RFF}$_M$\xspace}
+\newcommand{\rffM}{\texttt{RFF}$_{2M}$\xspace}
+
+\newcommand{\sssl}{\texttt{SSSL}\xspace}
+\newcommand{\ssslm}{\texttt{SSSL}$_M$\xspace}
+\newcommand{\quic}{\texttt{QUIC}\xspace}
+
+\newcommand{\ols}{\texttt{OLS}\xspace}
+\newcommand{\uluru}{\texttt{ULURU}\xspace}
+\newcommand{\srht}{\texttt{SRHT-LS}\xspace}
+\newcommand{\lev}{\texttt{LEV-LS}\xspace}
+\newcommand{\our}{\texttt{IWS-LS}\xspace}
+\newcommand{\ourapprox}{\texttt{aIWS-LS}\xspace}
+\newcommand{\irh}{\texttt{aRWS-LS}\xspace}
+
+\newcommand{\iws}{influence weighted subsampling\xspace}
+
+
+\newcommand{\data}{{T}}
+\newcommand{\ccH}{{\mathcal H}}
+\newcommand{\err}{{\mathcal E}}
+
+
+%%%%%%% Regression coefficients
+\newcommand{\wreg}{{\mathbf w}}
+\newcommand{\wccaj}{{{\beta}}}
+\newcommand{\wcca}{{\boldsymbol{\wccaj}}}
+
+\newcommand{\LS}{{\text{LS}}}
+\newcommand{\OLS}{{\text{OLS}}}
+\newcommand{\DS}{{\text{IWS}}}
+\newcommand{\MOD}{{\text{mod}}}
+
+
+%%%%%%% Constants and things
+
+\newcommand{\samp}{n}
+\newcommand{\dims}{p}
+\newcommand{\subsamp}{\samp_{subs}}
+
+
+\newcommand{\loss}{\ell}
+\newcommand{\nfeatures}{D}
+\newcommand{\nlabeled}{n}
+\newcommand{\ntotal}{N}
+\newcommand{\nRfeatures}{M}
+
+\newcommand{\savefootnote}[2]{\footnote{\label{#1}#2}}
+\newcommand{\repeatfootnote}[1]{\textsuperscript{\ref{#1}}}
+
+
+\newcommand{\tr}{^{\top}}
+
+\newcommand{\MB}[1]{\text{MB}\left({#1}\right)}
+
+
+%%%%%%% Barber's inputs
+\newcommand{\bfmu}{{\mathbf{\mu}}}
+\newcommand{\lb}{\left(}
+\newcommand{\rb}{\right)}
+
+\newcommand{\kl}[2]{\textrm{KL}\!\br{#1|#2}}
+\newcommand{\KL}{Kullback-Leibler\xspace}
+
+\renewcommand{\mod}[1]{\left| #1 \right|}  % \mod{foo} = |foo|
+\newcommand{\trace}[1]{{\rm tr}\left({#1}\right)}
+\renewcommand{\det}[1]{\mathrm{det}\br{#1}}
+\newcommand{\ldet}[1]{\log \mathrm{det}\br{#1}}
+\newcommand{\pdo}[2]{\frac{\partial {#1}}{\partial {#2}}}
+\newcommand{\ddu}[1]{\frac{d}{d {#1}}}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\cb}[1]{\left\{ {#1} \right\}}
+\newcommand{\br}[1]{\left( {#1} \right)}
+\newcommand{\sq}[1]{\left[ {#1} \right]}
+\newcommand{\nrm}[1]{\Vert {#1} \Vert}
+\newcommand{\nrma}[1]{\Vert {#1} \Vert_2}
+\newcommand{\av}[1]{\left\langle{#1}\right\rangle}
+
+\newcommand{\norm}[1]{\left|| #1 \right||}
+
+\newcommand{\order}[1]{O \br{ #1 }}
+
+
+\DeclareMathOperator\erf{erf}
+\newcommand{\Prob}{{\mathbb P}}
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\N}{{\mathcal N}}
+
+
+
+%%%% Bold letters
+\newcommand{\Xt}{{\mathbf{X}}}
+\renewcommand{\u}{\mathbf{u}}
+\newcommand{\s}{\mathbf{s}}
+
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\z}{\mathbf{z}}
+\newcommand{\K}{\mathbf{K}}
+\newcommand{\Lb}{\mathbf{L}}
+\newcommand{\Id}{\mathbf {I}}
+\newcommand{\bb}{{\mathbf{b}}}
+\newcommand{\wt}{{\mathbf{w}}}
+\newcommand{\vt}{{\mathbf{v}}}
+\newcommand{\bt}{{\mathbf{b}}}
+\newcommand{\dt}{{\mathbf{d}}}
+\newcommand{\et}{{\mathbf{e}}}
+
+\newcommand{\mt}{{\mathbf{m}}}
+\newcommand{\gt}{{\mathbf{g}}}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\lloss}{loss}
+
+
+\newcommand{\At}{{\mathbf{A}}}
+\newcommand{\Bt}{{\mathbf{B}}}
+\newcommand{\Ct}{{\mathbf{C}}}
+\newcommand{\Dt}{{\mathbf{D}}}
+\newcommand{\Gt}{{\mathbf{G}}}
+\newcommand{\Ht}{{\mathbf{H}}}
+
+
+\newcommand{\It}{{\mathbf{I}}}
+\newcommand{\Jt}{{\mathbf{J}}}
+\newcommand{\Kt}{{\mathbf{K}}}
+\newcommand{\Lt}{{\mathbf{L}}}
+
+
+\newcommand{\Mt}{{\mathbf{M}}}
+\newcommand{\Rt}{{\mathbf{R}}}
+\newcommand{\St}{{\mathbf{S}}}
+\newcommand{\Zt}{{\mathbf{Z}}}
+\newcommand{\Ut}{{\mathbf{U}}}
+\newcommand{\Vt}{{\mathbf{V}}}
+\newcommand{\Wt}{{\mathbf{W}}}
+
+
+%%%% Bold greek
+\newcommand{\boldDelta}{\boldsymbol{\Delta}}
+\newcommand{\bolddelta}{\boldsymbol{\delta}}
+\newcommand{\boldeta}{\boldsymbol{\eta}}
+\newcommand{\boldnu}{\boldsymbol{\nu}}
+\newcommand{\boldalpha}{\boldsymbol{\alpha}}
+\newcommand{\boldbeta}{\boldsymbol{\beta}}
+\newcommand{\boldepsilon}{\boldsymbol{\epsilon}}
+\newcommand{\boldSigma}{\boldsymbol{\Sigma}}
+\newcommand{\boldsigma}{\boldsymbol{\sigma}}
+\newcommand{\boldtau}{\boldsymbol{\tau}}
+\newcommand{\boldlambda}{\boldsymbol{\lambda}}
+\newcommand{\boldLambda}{\boldsymbol{\Lambda}}
+\newcommand{\boldpsi}{\boldsymbol{\psi}}
+\newcommand{\boldxi}{\boldsymbol{\xi}}
+\newcommand{\boldPsi}{\boldsymbol{\Psi}}
+\newcommand{\boldphi}{\boldsymbol{\phi}}
+\newcommand{\boldPhi}{\boldsymbol{\Phi}}
+\newcommand{\boldtheta}{\boldsymbol{\theta}}
+\newcommand{\boldTheta}{\boldsymbol{\Theta}}
+\newcommand{\boldgamma}{\boldsymbol{\gamma}}
+\newcommand{\boldpi}{\boldsymbol{\pi}}
+\newcommand{\boldPi}{\boldsymbol{\Pi}}
+
+\newcommand{\boldGamma}{\boldsymbol{\Gamma}}
+
+
+\newcommand{\boldSigmai}{\inv{\boldsymbol{\Sigma}}}
+
+\newcommand{\boldomega}{\boldsymbol{\omega}}
+\newcommand{\estbeta}{\widehat{\boldbeta}}
+\newcommand{\estbetaSS}{\widehat{\boldbeta}_{\DS}}
+
+\newcommand{\boldSigmahat}{\widehat{\boldsymbol{\Sigma}}}
+\newcommand{\boldSigmahati}{\widehat{\boldsymbol{\Sigma}}^{-1}}
+
+
+
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{rem}{Remark}
+\newtheorem{defn}{Definition}
+\newtheorem{assn}{Assumption}
+

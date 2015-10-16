@@ -1,0 +1,143 @@
+\ProvidesPackage{beamerthemeunterstrassposter}
+
+\RequirePackage{tikz}
+\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,calc}
+\RequirePackage{amsmath,amssymb,bm,amsthm}
+\usefonttheme{default}
+
+%\setbeamertemplate{itemize item}[triangle]
+\setbeamertemplate{navigation symbols}{}  % no navigation on a poster
+
+% ETH colors
+\definecolor{ethcolor1}{HTML}{1F407A}
+\definecolor{ethcolor2}{HTML}{3C5A0F}
+\definecolor{ethcolor3}{HTML}{0069B4}
+\definecolor{ethcolor4}{HTML}{72791C}
+\definecolor{ethcolor5}{HTML}{91056A}
+\definecolor{ethcolor6}{HTML}{6F6F6E}
+\definecolor{ethcolor7}{HTML}{A8322D}
+\definecolor{ethcolor8}{HTML}{007A92}
+\definecolor{ethcolor9}{HTML}{956013}
+
+% aluminium
+\definecolor{tangocolordarkaluminium}{HTML}{BABDB6}
+%\definecolor{tangocolormediumaluminium}{HTML}{D3D7CF}
+\definecolor{tangocolormediumaluminium}{HTML}{D3D3D3}
+\definecolor{tangocolorlightaluminium}{HTML}{EEEEEC}
+
+% beamer rose colors
+\definecolor{rose fg}{HTML}{3333B2}
+\definecolor{rose bg}{HTML}{D6D6F0}
+\definecolor{rose example fg}{HTML}{008000}
+\definecolor{rose example bg}{HTML}{CCE5CC}
+\definecolor{rose alerted fg}{HTML}{FF0000}
+\definecolor{rose alerted bg}{HTML}{FFCCCC}
+
+% body colors and fonts
+\setbeamercolor*{normal text}{fg=black,bg=tangocolorlightaluminium}
+
+% headline colors and fonts
+\setbeamercolor{headline}{fg=white,bg=ethcolor1}
+\setbeamercolor{title in headline}{fg=white}
+
+
+% block environment
+\setbeamercolor*{block title}{fg=rose fg,bg=rose bg}
+\setbeamercolor*{block body}{bg=white,fg=black}
+\setbeamerfont{block title}{size=\Large}
+%\setbeamercolor{b text}{fg=ethcolor7}
+
+% example environment
+\setbeamercolor{block title example}{fg=rose example fg,bg=rose example bg}
+\setbeamercolor{block body example}{bg=white,fg=black}
+\setbeamercolor{example text}{fg=ethcolor4}
+
+% alerted environment
+%\setbeamercolor{block title alerted}{fg=white,bg=tangocolordarkplum}
+\setbeamercolor{block title alerted}{fg=rose alerted fg,bg=rose alerted bg}
+\setbeamercolor{block body alerted}{bg=white,fg=black}
+\setbeamercolor{alerted text}{fg=rose example fg}
+
+% headline
+\setbeamertemplate{headline}{
+  \leavevmode
+\vskip0.01\paperwidth
+\begin{columns}
+\column{0.95\paperwidth}
+  \begin{beamercolorbox}[wd=0.95\paperwidth,center]{headline}
+    \begin{columns}[T]
+          \begin{column}{.01\paperwidth}
+      \end{column}
+          \begin{column}{.25\paperwidth}
+        \vskip1.7cm
+        \begin{center}
+          \includegraphics[width=.7\linewidth]{eth_logo_kurz_neg.eps}
+          %\includegraphics[height=.25\linewidth]{nictalogo}
+        \end{center}
+        \vskip0.3cm
+      \end{column}
+      \begin{column}{.01\paperwidth}
+      \end{column}
+      \begin{column}{.75\paperwidth}
+        \vskip4ex
+        \raggedright
+        \usebeamercolor{title in headline}{\color{fg}\textbf{\LARGE{\inserttitle}}\\[2ex]}
+        \usebeamercolor{author in headline}{\color{fg}\textit{\Large{\insertauthor}}\\[5ex]}
+        \usebeamercolor{institute in headline}{\color{fg}\large{\insertinstitute}}
+      \end{column}
+
+
+    \end{columns}
+    \vskip0.02\paperwidth
+  \end{beamercolorbox}
+\end{columns}
+%\vspace{-5cm}
+%  \begin{beamercolorbox}[wd=\paperwidth]{lower separation line head}
+%    \rule{0pt}{2pt}
+%  \end{beamercolorbox}
+}
+
+
+\setbeamertemplate{block begin}{
+  \vskip1ex
+  \begin{beamercolorbox}[rounded=true,leftskip=1cm,colsep*=.75ex]{block title}%
+    \usebeamerfont*{block title}\insertblocktitle
+  \end{beamercolorbox}%
+  {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[rounded=true,colsep*=.75ex,sep=.75ex,vmode]{block body}%
+    \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+  }
+  \setbeamertemplate{block end}{
+  \end{beamercolorbox}
+}
+
+\setbeamertemplate{block alerted begin}{
+  \vskip1ex
+  \begin{beamercolorbox}[rounded=true,leftskip=1cm,colsep*=.75ex]{block title alerted}%
+    \usebeamerfont*{block title alerted}\insertblocktitle
+  \end{beamercolorbox}%
+  {\ifbeamercolorempty[bg]{block alerted body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body alerted}%
+  \begin{beamercolorbox}[rounded=true,colsep*=.75ex,sep=.75ex,vmode]{block body alerted}%
+    \ifbeamercolorempty[bg]{block body alerted}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+  }
+
+\setbeamertemplate{block alerted end}{
+  \end{beamercolorbox}
+}
+
+\setbeamertemplate{block example begin}{
+  \vskip1ex
+  \begin{beamercolorbox}[rounded=true,leftskip=1cm,colsep*=.75ex]{block title example}%
+    \usebeamerfont*{block title example}\insertblocktitle
+  \end{beamercolorbox}%
+  {\ifbeamercolorempty[bg]{block example body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body example}%
+  \begin{beamercolorbox}[rounded=true,colsep*=.75ex,sep=.75ex,vmode]{block body example}%
+    \ifbeamercolorempty[bg]{block body example}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+  }
+
+\setbeamertemplate{block example end}{
+  \end{beamercolorbox}
+}
