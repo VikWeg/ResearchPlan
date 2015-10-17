@@ -55,6 +55,7 @@ brain = color_mask(cortex_mask,198/255,56/255,32/255);
 imwrite(brain + cables_edge + cables_filling + background_color,'cables.png')
 imwrite(brain + background_color + repmat(wm,[1 1 3]),'cortex.png')
 
+%% GRID
 N=40;
 n=3;
 nn=1;
@@ -94,105 +95,70 @@ while i+N-1 < size(cortex_bw,1)
     i = i + N + 2*n;
 end
 
-t=10;
-grid = [grid(:,t:end) grid(:,1:t-1)];
+% t=10;
+% grid = [grid(:,t:end) grid(:,1:t-1)];
 
 grid = repmat(grid,[1 1 3]);
 
 imwrite(brain + cables_edge + cables_filling + background_color + grid,'grid.png')
 
-%%
-im=cables_edge_mask(200:250,200:250);
-
-subplot(1,2,1)
-imshow(im)
-subplot(1,2,2)
-imshow(im2ell(im))
-
-%%
-
-% 
-% ellipses = cell(1,9);
-
-% t = linspace(0,2*pi);
-% ell_coo = [cos(t)', sin(t)'];
-% ellipses{1} = coo2im(ell_coo,N,N);
-% imshow(ellipses{1})
-
-% a=1.5;b=1;
-% for d = 0:7
-%     phi = d*pi/8;
-%     ell_coo = [a*cos(phi)*cos(t)' - b*sin(phi)*sin(t)', a*sin(phi)*cos(t)' + b*cos(phi)*sin(t)'];
-%     subplot(3,3,d+1)
-% %     plot(ell_coo(:,1),ell_coo(:,2))
-% %     axis([-3 3 -3 3])
-%     ellipses{d+2} = coo2im(ell_coo,N,N);
-%     imshow(ellipses{d+2})
-% end
+%% ELLIPSE TEMPLATES
 
 base_ellipse = cell(1,3);
-
 for i=1:3
     base_ellipse{i} = zeros(N);
 end
 
-
-for e = 1:3
-    
-for i=1:N
-    for j=1:N
-        if abs((N-i+1 - N/2)^2/(10-(e-1)*3)^2 + (j-N/2)^2/(10+(e-1)*3)^2 - 1) <= 0.05 + (e-1)^1.5*0.05
-            base_ellipse{e}(i,j)=1;
+for e = 1:3  
+    for i=1:N
+        for j=1:N
+            if abs((N-i+1 - N/2)^2/(10-(e-1)*3)^2 + (j-N/2)^2/(10+(e-1)*3)^2 - 1) <= 0.05 + (e-1)^1.5*0.05
+                base_ellipse{e}(i,j)=1;
+            end      
         end
     end
-end
-
-base_ellipse{e} = imdilate(base_ellipse{e},strel('disk',1));
-
-% subplot(1,3,e)
-% imshow(base_ellipse{e})
-
+    
+    base_ellipse{e} = imdilate(base_ellipse{e},strel('disk',1));
 end
 
 rot_ell = cell(1,2*8+1);
-
 rot_ell{1} = base_ellipse{1};
-
-
 for k=1:2
-for r=0:7   
-    rot_ell{(k-1)*8 + r + 2} = imrotate(base_ellipse{k+1},r*180/8,'nearest','crop');
+    for r=0:7   
+        rot_ell{(k-1)*8 + r + 2} = imrotate(base_ellipse{k+1},r*180/8,'nearest','crop');
+    end
 end
-end
-
-% for i=1:2*8+1
-% rot_ell_edge = edge(rot_ell{i},'Canny');
-% rot_ell_dilated = imdilate(rot_ell_edge,strel('disk',2));
-% rot_ell_filtered = imfilter(rot_ell{i},fspecial('gaussian',3,1));
-% rot_ell{i}(rot_ell_dilated) = rot_ell_filtered(rot_ell_dilated);
-% end
-
-% for i=1:2*8+1
-% subplot(3,8,i)
-% imshow(rot_ell{i})
-% end
 
 ell_hist = cell(1,2*8 + 1);
-
 for r = 1:2*8+1
     [~,gdir] = imgradient(rot_ell{r});
     ell_hist{r} = hist( reshape(gdir(gdir~=0),1,numel(gdir(gdir~=0))) , linspace(-180,180,10) );
     ell_hist{r} = ell_hist{r} / sum(ell_hist{r});
-%     subplot(3,8,r)
-% %     ell_hist{r};
-%     bar(ell_hist{r})
 end
+
+% imwrite(base_ellipse{1},'base1.png')
+% imwrite(base_ellipse{2},'base2.png')
+% imwrite(base_ellipse{3},'base3.png')
 
 %%
 
+base_ellipse{1} = imread('base1.png');
+base_ellipse{2} = imread('base2.png');
+base_ellipse{3} = imread('base3.png');
+
+rot_ell = cell(1,2*8+1);
+rot_ell{1} = base_ellipse{1};
+for k=1:2
+    for r=0:7   
+        rot_ell{(k-1)*8 + r + 2} = imrotate(base_ellipse{k+1},r*180/8,'nearest','crop');
+    end
+end
+
+%% ELLIPSE DATA
+
 img = im2double(cortex_bw + cables_edge_mask);
 
-ell_grid = zeros(size(cortex_bw));
+ell_grid = zeros(size(cortex_bw,1),size(cortex_bw,2),3);
 
 i=n+1;
 while i+N-1 < size(cortex_bw,1)
@@ -205,7 +171,7 @@ while i+N-1 < size(cortex_bw,1)
     cable_count = sum(sum(double(cables_edge_mask(i:i+N-1,j:j+N-1))));
     
     if (cortex_count > 10*N || cable_count == 0) && cortex_count > 0
-        ell_grid(i:i+N-1,j:j+N-1) = rot_ell{1};
+        ell_grid(i:i+N-1,j:j+N-1,1:3) = rot_ell{1};
     elseif sum(sum(double(block))) > 0
         
         [~,gdir] = imgradient(block);
@@ -218,7 +184,7 @@ while i+N-1 < size(cortex_bw,1)
             kldiv_new = KLdiv(ell_hist{r},block_hist);
             if kldiv_new < kldiv
                 kldiv = kldiv_new;
-                ell_grid(i:i+N-1,j:j+N-1) = rot_ell{r};
+                ell_grid(i:i+N-1,j:j+N-1,1:3) = rot_ell{r};
             end
         end
         
@@ -228,14 +194,13 @@ while i+N-1 < size(cortex_bw,1)
     i = i + N + 2*n;
 end
 
-ell_grid = [ell_grid(:,t:end) ell_grid(:,1:t-1)];
+% ell_grid = [ell_grid(:,t:end) ell_grid(:,1:t-1)];
 
-% imshow(img)
-% imshow(repmat(ell_grid,[1 1 3]))
+imshow(ell_grid)
 
 %%
-imshow(repmat(-1*ell_grid,[1 1 3]) + brain + 1*cables_edge + 1*cables_filling + background_color + grid)
-
+imshow(repmat(-1*ell_grid,[1 1 3]) + 1*brain + 0*cables_edge + 0*cables_filling + background_color + grid + repmat(wm,[1 1 3]))
+% imshow(repmat(-1*ell_grid,[1 1 3]) + brain + 0.5*cables_edge + 1*cables_filling + background_color + grid)
 
 
 
