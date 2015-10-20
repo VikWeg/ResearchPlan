@@ -128,6 +128,23 @@ State-of-the-Art min 1
 \begin_layout Standard
 previous & related work, significance, challenges, main concepts, key papers,
  show background knowledge
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+current approaches restricted to group wise (average), voxelwise analysis
+ (Haller)
+\begin_inset Newline newline
+\end_inset
+
+advanced approaches promising (feis)
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
@@ -136,10 +153,54 @@ Goals of the Thesis min 1
 
 \begin_layout Standard
 research questions, methods, contributions
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Standard
 state general goals first, work down from there (layering)
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+(connectivity) model based ML
+\begin_inset Newline newline
+\end_inset
+
+model based approach -> interpretability
+\begin_inset Newline newline
+\end_inset
+
+introduce ML into neuro medicine community, ML not established yet
+\begin_inset Newline newline
+\end_inset
+
+Combo clinical data + MRI image data
+\begin_inset Newline newline
+\end_inset
+
+multimodal MRI
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+global tracking
+\begin_inset Newline newline
+\end_inset
+
+ASC + MRFs
+\begin_inset Newline newline
+\end_inset
+
+Factorial/Gibbs ASC (local ASC)
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
@@ -173,6 +234,10 @@ References max 1
 
 \begin_layout Standard
 from state of the art section, key papers
+\end_layout
+
+\begin_layout Standard
+** Parkinson desease subtypes
 \end_layout
 
 \begin_layout Standard
@@ -253,10 +318,6 @@ High Performance Computing for Science and Engineering I, 4KP
 
 \begin_layout Standard
 Design of Parallel and High-Performance Computing, 7KP
-\end_layout
-
-\begin_layout Standard
-Advanced Mathematical Signal Processing, 3KP
 \end_layout
 
 \begin_layout Standard
