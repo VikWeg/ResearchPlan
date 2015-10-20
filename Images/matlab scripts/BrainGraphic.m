@@ -32,7 +32,7 @@ wm_eroded = imerode(wm,strel('disk',5));
 background = ones(size(brain_bw));
 background(cc2.PixelIdxList{2}) = 0;
 background(cortex_bw) = 0;
-background_color = color_mask(background,241/255,220/255,219/255); % BACKGROUND COLOR 250/255,230/255,230/255
+background_color = color_mask(background,250/255,230/255,230/255); % BACKGROUND COLOR 250/255,230/255,230/255
 
 % cables = imresize(cables,size(brain_bw));
 cables = mask_rgb(cables,wm);
@@ -55,10 +55,10 @@ cables_filling(logical(background)) = 0;
 cables_filling(logical(cortex_bw)) = 0;
 cables_filling = color_mask(cables_filling,1,1,1);
 
-cables_edge = color_mask(cables_edge_mask,218/255,150/255,149/255); % CABLE COLOR 170/255,56/255,50/255
+cables_edge = color_mask(cables_edge_mask,170/255,56/255,50/255); % CABLE COLOR 170/255,56/255,50/255
 
 
-brain = color_mask(cortex_mask,149/255,55/255,53/255); % BRAIN COLOR 198/255,56/255,32/255
+brain = color_mask(cortex_mask,198/255,56/255,32/255); % BRAIN COLOR 198/255,56/255,32/255
 
 % subplot(1,2,1)
 % imshow(brain + background_color + repmat(wm,[1 1 3]))
@@ -68,10 +68,12 @@ brain = color_mask(cortex_mask,149/255,55/255,53/255); % BRAIN COLOR 198/255,56/
 imwrite(brain + background_color + repmat(wm,[1 1 3]),'output/1_cortex.png')
 imwrite(brain + cables_edge + cables_filling + background_color,'output/2_cables.png')
 
-%% GRID
+%% SOLID GRID
 N=160;
-n=3;
-nn=1;
+n=5; % white n > nn
+nn=3; % black
+% n-nn = white frame
+% nn = black frame
 
 box = (-1)*ones(N+2*n);
 box(nn+1:N+2*n-nn,nn+1:N+2*n-nn) = 1;
@@ -87,19 +89,19 @@ while i+N-1 < size(cortex_bw,1)
        grid(i-n:i+N+n-1,j-n:j+N+n-1) = box;
        
        if sum(sum(mask(i-N-2*n:i-2*n-1,j:j+N-1))) == 0
-           grid(i-n-1,j-n:j+N+n-1) = -1;
+           grid(i-n-1-nn+1:i-n-1,j-n-nn:j+N+n-1+nn) = -1; % up
        end
        
        if sum(sum(mask(i+N+2*n:i+2*N+2*n-1,j:j+N-1))) == 0
-           grid(i+N+1,j-n:j+N+n-1) = -1;
+           grid(i+N+n:i+N+n+nn-1,j-n-nn:j+N+n-1+nn) = -1; % down
        end
        
        if sum(sum(mask(i:i+N-1,j+N+2*n:j+2*N+2*n-1))) == 0
-       grid(i-n-1:i+N+n-1,j+N+n) = -1;
+       grid(i-n-1:i+N+n-1,j+N+n:j+N+n+nn-1) = -1; % right
        end
        
        if sum(sum(mask(i:i+N-1,j-N-2*n:j-2*n-1))) == 0
-       grid(i-n-1:i+N+n-1,j-n-1) = -1;
+       grid(i-n-1:i+N+n-1,j-n-1-nn+1:j-n-1) = -1; % left
        end
        
     end
@@ -108,10 +110,10 @@ while i+N-1 < size(cortex_bw,1)
     i = i + N + 2*n;
 end
 
-% t=10;
-% grid = [grid(:,t:end) grid(:,1:t-1)];
-
 grid = repmat(grid,[1 1 3]);
+
+cables_edge = color_mask(cables_edge_mask,230/255,200/255,200/255); % CABLE COLOR LIGHT 230/255,200/255,200/255
+brain = color_mask(cortex_mask,210/255,170/255,170/255); % BRAIN COLOR LIGHT 210/255,170/255,170/255
 
 imwrite(brain + cables_edge + cables_filling + background_color + grid,'output/3_grid.png')
 
@@ -230,69 +232,119 @@ end
 
 %% TENSOR GRID
 
-cables_edge = color_mask(cables_edge_mask,241/255,220/255,219/255); % CABLE COLOR LIGHT 230/255,200/255,200/255
-brain = color_mask(cortex_mask,218/255,150/255,149/255); % BRAIN COLOR LIGHT 210/255,170/255,170/255
+cables_edge = color_mask(cables_edge_mask,230/255,200/255,200/255); % CABLE COLOR LIGHT 230/255,200/255,200/255
+brain = color_mask(cortex_mask,210/255,170/255,170/255); % BRAIN COLOR LIGHT 210/255,170/255,170/255
 
-img_tot = 1*brain + cables_edge + 1*cables_filling + background_color + grid;
+img_tot = 1*brain + 1*cables_edge + 1*cables_filling + background_color + grid;% + repmat(wm,[1 1 3]);
 img_tot(ell_grid~=0) = ell_grid(ell_grid~=0);
 imwrite(img_tot,'output/8_ellgrid.png')
 
 
 %% INSET ANISO
-% inset0 = imread('inset_aniso_4.png');
+% inset0 = imread('insets/inset_iso_4.png');
 % 
 % inset0 = imopen(inset0,strel('disk',2));
 % 
 % inset0 = imresize(inset0,[600 600]); % not necessary
 % 
-% imwrite(inset0,'inset_aniso_5.png')
-% 
-% ell_inset = imread('tensors/base3.png');
-% ell_inset = imresize(ell_inset,[500 500]); % 600x600 for iso
-% ell_inset = imopen(ell_inset,strel('disk',10));
-% ell_inset = padarray(ell_inset,[50 50]); % comment out for iso
-% 
-% inset1 = inset0;
-% inset1(ell_inset>0) = ell_inset(ell_inset>0);
-% 
-% imwrite(inset1,'inset_ansio_6.png')
-% 
 % for i = 1:size(inset0,1)
 %     for j = 1:size(inset0,2)
 %         if inset0(i,j,1) > 140 && inset0(i,j,2) < 200 && inset0(i,j,3) < 150 || (inset0(i,j,1) > 200 && inset0(i,j,2) < 200)
-%         inset0(i,j,1:3) = [230 200 200];
+%         inset0(i,j,1:3) = [170 56 50];
 %         end
 %     end
 % end
 % 
-% imwrite(inset0,'inset_aniso_7.png')
+% imwrite(inset0,'insets/inset_iso_5.png')
+% 
+% ell_inset = imread('tensors/base0.png'); % base0 for iso, base 4 for ansio
+% ell_inset = imresize(ell_inset,[600 600]); % 600x600 for iso / 500x500 for aniso
+% ell_inset = imopen(ell_inset,strel('disk',10));
+% % ell_inset = padarray(ell_inset,[50 50]); % comment out for iso
+% 
+% inset1 = inset0;
+% inset1(ell_inset>0) = ell_inset(ell_inset>0);
+% 
+% for i = 1:size(inset1,1)
+%     for j = 1:size(inset1,2)
+%         if inset1(i,j,1) == 170
+%         inset1(i,j,1:3) = [230 200 200];
+%         end
+%     end
+% end
+% 
+% imwrite(inset1,'insets/inset_iso_6.png')
+
+%% LIGHT GRID
+N=160;
+n=3; % white n > nn
+nn=1; % black
+% n-nn = white frame
+% nn = black frame
+
+box = (-1)*ones(N+2*n);
+box(nn+1:N+2*n-nn,nn+1:N+2*n-nn) = 1;
+box(n+1:N+n,n+1:N+n) = 0;
+
+mask = cortex_bw + wm;
+grid = zeros(size(cortex_bw));
+i=n+1;
+while i+N-1 < size(cortex_bw,1)
+   j=n+1;
+   while j+N-1 < size(cortex_bw,2)
+    if sum(sum(mask(i:i+N-1,j:j+N-1))) > 0
+       grid(i-n:i+N+n-1,j-n:j+N+n-1) = box;
+       
+       if sum(sum(mask(i-N-2*n:i-2*n-1,j:j+N-1))) == 0
+           grid(i-n-1-nn+1:i-n-1,j-n-nn:j+N+n-1+nn) = -1; % up
+       end
+       
+       if sum(sum(mask(i+N+2*n:i+2*N+2*n-1,j:j+N-1))) == 0
+           grid(i+N+n:i+N+n+nn-1,j-n-nn:j+N+n-1+nn) = -1; % down
+       end
+       
+       if sum(sum(mask(i:i+N-1,j+N+2*n:j+2*N+2*n-1))) == 0
+       grid(i-n-1:i+N+n-1,j+N+n:j+N+n+nn-1) = -1; % right
+       end
+       
+       if sum(sum(mask(i:i+N-1,j-N-2*n:j-2*n-1))) == 0
+       grid(i-n-1:i+N+n-1,j-n-1-nn+1:j-n-1) = -1; % left
+       end
+       
+    end
+    j = j + N + 2*n;   
+   end
+    i = i + N + 2*n;
+end
+
+grid = repmat(grid,[1 1 3]);
 
 %% INSET IMAGE
 
 img_tot = 1*brain + cables_edge + 1*cables_filling + background_color + grid;
 
-inset0 = imread('insets/inset_iso_7.png'); % 5 or 7
+inset0 = imread('insets/inset_aniso_6.png'); % 5 or 6
 
 d=150;
 img_tot(d:d+size(inset0,1)-1,size(img_tot,2)-size(inset0,2)+1-d:size(img_tot,2)-d,1:3) = im2double(inset0);
 
-marked0 = imread('insets/inset_iso_2.png'); % 0 or 2
+marked0 = imread('insets/inset_aniso_2.png'); % 0 or 2
 
 p=6;
 marked0 = padarray(marked0,[p p]);
-coo = [7 22]; % (6,20) for aniso, (7,22) for iso
+coo = [6 20]; % (6,20) for aniso, (7,22) for iso
 img_tot(coo(1)*(N+2*n)-p: coo(1)*(N+2*n) + size(marked0,1)-1-p,coo(2)*(N+2*n)-p: coo(2)*(N+2*n) + size(marked0,1)-1-p,1:3) = im2double(marked0);
 
-imwrite(img_tot,'output/5_inset.png') %enumerate different insets
+imwrite(img_tot,'output/7_inset.png') %enumerate different insets
 
 %% MODEL GRID
 brain_background = ones(size(brain_bw));
 
-brain_background(wm==1) = 0;
+brain_background(wm==1) = 1;
 
 brain_background = color_mask(brain_background,250/255,230/255,230/255);
 
-img_tot = brain_background + grid + ell_grid + repmat(wm,[1 1 3]);
+img_tot = brain_background + grid + ell_grid;% + repmat(wm,[1 1 3]);
 img_tot(ell_grid~=0) = ell_grid(ell_grid~=0);
 imwrite(img_tot,'output/9_modelgrid.png')
 
