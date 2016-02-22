@@ -1,0 +1,8 @@
+graph classification
+graph clustering
+graph edit distance
+graph kernel
+graph embedding
+
+structural pattern recognition
+graph matching
