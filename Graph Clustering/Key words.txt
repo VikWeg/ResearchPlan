@@ -6,3 +6,5 @@ graph embedding
 
 structural pattern recognition
 graph matching
+
+kernel clustering
