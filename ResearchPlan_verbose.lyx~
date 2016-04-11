@@ -110,6 +110,16 @@ Summary max 0.5
 \end_layout
 
 \begin_layout Standard
+This thesis is conducted at the intersection of machine learning and its
+ application to medical image analysis (performance computing?).
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 area of research, mainn goals, expecte contributions
 \end_layout
 
@@ -153,6 +163,10 @@ Marras 2015 paper: Parkinson subtypes
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+Performance Computing Aspects
 \end_layout
 
 \begin_layout Section*
@@ -288,10 +302,6 @@ Additional Information
 Expected publications
 \end_layout
 
-\begin_layout Standard
-Teachuing duties: Past, Current, Future
-\end_layout
-
 \begin_layout Section*
 Study Plan
 \end_layout
@@ -305,7 +315,7 @@ Past:
 \end_layout
 
 \begin_layout Standard
-2015 FS, How to write fast numerical code, 6KP
+2015 FS, How to write fast numerical code, 6 KP
 \end_layout
 
 \begin_layout Standard
@@ -317,19 +327,23 @@ Future: (overcomplete list, suggestions)
 \end_layout
 
 \begin_layout Standard
-Complex Networks, 4KP
+Software Design 6 KP
 \end_layout
 
 \begin_layout Standard
-High Performance Computing for Science and Engineering I, 4KP
+Design of Parallel and High-Performance Computing, 7 KP
 \end_layout
 
 \begin_layout Standard
-Design of Parallel and High-Performance Computing, 7KP
+Complex Networks, 4 KP
 \end_layout
 
 \begin_layout Standard
-Medical Image Analysis, 3KP
+High Performance Computing for Science and Engineering I, 4 KP
+\end_layout
+
+\begin_layout Standard
+Medical Image Analysis, 3 KP
 \end_layout
 
 \end_body
