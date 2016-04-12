@@ -2,7 +2,7 @@
 \lyxformat 474
 \begin_document
 \begin_header
-\textclass IEEEtran-CompSoc
+\textclass article
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -110,9 +110,37 @@ Summary max 0.5
 \end_layout
 
 \begin_layout Standard
-This thesis is conducted at the intersection of machine learning and its
- application to medical image analysis (performance computing?).
- 
+In these days digitalization of information is reaching out to all domains
+ fundamentally affecting the way data is acquired, stored and processed.
+ This evolution is especially exemplified by medicine which has been transformin
+g from a knowledge-intensive science to a data-intensive science 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "knowledge/data intensity"
+
+\end_inset
+
+.
+ Particularly many opportunities that come with this transition are present
+ in the area of radiology that comprises key technologies such as magnetic
+ resonance imaging (MRI) which is applied broadly in practice, because it
+ enables non-invasive and non-radiative imaging of the internal structure
+ of sensitive organs such as the brain.
+ This provides a direct handle to the source of many neurological diseases
+ which in the past could only be investigated via secondary symptoms.
+ The vision is that these specific markers enable individualized diagnosis
+ leading to therapies tailored to each person's phenotype - a goal which
+ becomes even more significant in the face of an ever aging society.
+ The longer average life expectancy results in the proliferation of neurological
+ spectrum disorders, i.e.
+ such that do not have one typical disease manifestation but rather a distributi
+on of individual manifestations.
+ However, the increase in information content also comes at the cost of
+ increased data complexity which poses serious challenges to its analysis.
+ It is not only the number of brain images recorded that can go into the
+ hundreds if not thousands for a given study which makes analysis by trained
+ humans difficult, but also the non-intuitive topology of volumetric tensor
+ images.
 \begin_inset Newline newline
 \end_inset
 
@@ -120,7 +148,7 @@ This thesis is conducted at the intersection of machine learning and its
 \end_layout
 
 \begin_layout Standard
-area of research, mainn goals, expecte contributions
+area of research, main goals, expecte contributions
 \end_layout
 
 \begin_layout Section*
@@ -292,6 +320,22 @@ from state of the art section, key papers
 
 \begin_layout Standard
 *references from nico
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "1"
+key "knowledge/data intensity"
+
+\end_inset
+
+ AI in medicine on its way from knowledge-intensive to data-intensive systems,
+ Horn 2001
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
