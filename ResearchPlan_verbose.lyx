@@ -212,8 +212,7 @@ The personalization of medicine is strongly driven by recent advancements
  of real interest in Neuroimaging with potential impact on the therapy of
  neurological diseases.
  This includes the systematic application and evaluation of algorithms as
- well as their efficient and usable implementation to meet practical needs
- with respect to runtime and ease of use.
+ well as their efficient and usable implementation to meet practical needs.
 \begin_inset Newline newline
 \end_inset
 
@@ -221,26 +220,14 @@ The personalization of medicine is strongly driven by recent advancements
 \begin_inset Newline newline
 \end_inset
 
-benefit to people suffering from neurological illness.
- 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-supporting the systematic introduction of machine learning algorithms to
- the field of Neuroiamging.
- 
-\begin_inset Newline newline
-\end_inset
-
-
+area of research, main goals, expected contributions
 \end_layout
 
 \begin_layout Standard
-area of research, main goals, expecte contributions
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
@@ -291,10 +278,17 @@ on of individual manifestations.
 
 100-1k).
  We tackle this problem by building probabilistic models that take into
- account our knowledge about the data in order to engineer good features,
- but as to date it is not clear how diseases really express themselves as
- global patterns in brain images, the ultimate goal remains to develop data-driv
-en, automatic feature learning approaches.
+ account knowledge about the data in order to engineer good features, but
+ as to date it is not clear how diseases really express themselves as global
+ patterns in brain images, the ultimate goal remains to develop data-driven,
+ automatic feature learning approaches.
+ Once a model is specified on paper, the problem of finding the right parameters
+ follows.
+ This is typically computationally very demanding necessitating the use
+ of optimized code and special purpose hardware to speed up the learning.
+ In order to eventually utilize our systems in a clinical environment we
+ will have to provide a servicable interface for end users such as doctors
+ or neuroscientists.
 \begin_inset Newline newline
 \end_inset
 
@@ -330,17 +324,12 @@ State-of-the-Art min 1
 \end_layout
 
 \begin_layout Standard
-previous & related work, significance, challenges, main concepts, key papers,
- show background knowledge
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
 current approaches restricted to group wise (average), voxelwise analysis
  (Haller)
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
@@ -360,7 +349,24 @@ Marras 2015 paper: Parkinson subtypes
 \begin_inset Newline newline
 \end_inset
 
+Tractorgraphy
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
 Performance Computing Aspects
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+previous & related work, significance, challenges, main concepts, key papers,
+ show background knowledge
 \end_layout
 
 \begin_layout Section*
@@ -412,10 +418,6 @@ ASC + MRFs
 \begin_inset Newline newline
 \end_inset
 
-Factorial/Gibbs ASC (local ASC)
-\begin_inset Newline newline
-\end_inset
-
 
 \end_layout
 
@@ -425,6 +427,70 @@ Detailed Work Plan min 0.5
 
 \begin_layout Standard
 work packages, 3-12 months each, task+outcomes
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Köln Daten (dMRI): Clustering + subsequent classification
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+global tractography
+\begin_inset Newline newline
+\end_inset
+
+MRF approach, adaptive, ODFs
+\begin_inset Newline newline
+\end_inset
+
+MPI implementation
+\begin_inset Newline newline
+\end_inset
+
+Pairwise clustering approach
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+graph clustering: operator embedding
+\begin_inset Newline newline
+\end_inset
+
+network metrics
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Genf Daten: (dMRI, T1, T2, fMRI, susceptibility)
+\begin_inset Newline newline
+\end_inset
+
+3D conv nets
+\begin_inset Newline newline
+\end_inset
+
+Stacked+patched generalization
+\begin_inset Newline newline
+\end_inset
+
+Multi-modal approaches
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
@@ -498,18 +564,133 @@ key "knowledge/data intensity"
 
  AI in medicine on its way from knowledge-intensive to data-intensive systems,
  Horn 2001
-\begin_inset Newline newline
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "2"
+key "Feis: Symptom Side"
+
 \end_inset
 
-
+ Classification of symptom side predominance Parkinson, Feis 2015
 \end_layout
 
-\begin_layout Section*
-Additional Information
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "3"
+key "Feis: Post Surgery"
+
+\end_inset
+
+ Prediction of post-surgical seizure outcome in left mesial temporal lobe
+ epilepsy, Feis 2013
 \end_layout
 
-\begin_layout Standard
-Expected publications
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "4"
+key "Feis: Gender"
+
+\end_inset
+
+ Decoding gender dimorphism of the human brain using multimodal anatomical
+ and diffusion MRI data, Feis 2013
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "5"
+key "Frindel: Global Tractography"
+
+\end_inset
+
+ A Graph-Based Approach for Automatic Cardiac Tractography, Frindel 2010
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "6"
+key "Mangin: Global Tractography Review"
+
+\end_inset
+
+ Toward global tractography, Mangin 2013
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "7"
+key "Reisert: Global Tractography"
+
+\end_inset
+
+ Global fiber reconstruction becomes practical, Reisert 2011
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "8"
+key "Fillard: Global Tractography"
+
+\end_inset
+
+A Novel Global Tractography Algorithm Based on an Adaptive Spin Glass Model,
+ Fillard 2009
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "9"
+key "Marras: Parkinson Subtypes"
+
+\end_inset
+
+ Parkinson’s disease subtypes: lost in trans lation?, Marras 2015
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "10"
+key "Haller: Arterial Spin Labeling"
+
+\end_inset
+
+Arterial spin labeling May contribute to the Prediction of cognitive Deteriorati
+on in healthy elderly individuals, Aikaterini Xekardaki 2015
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "11"
+key "Network measures"
+
+\end_inset
+
+ Complex network measures of brain connectivity: Uses and interpretations,
+ Rubinov 2010
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "12"
+key "Bastiani: Tractography/network measures"
+
+\end_inset
+
+ Human cortical connectome reconstruction from diffusion weighted MRI: The
+ effect of tractography algorithm
 \end_layout
 
 \begin_layout Section*
