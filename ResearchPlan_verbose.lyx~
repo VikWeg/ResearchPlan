@@ -450,6 +450,10 @@ MRF approach, adaptive, ODFs
 \begin_inset Newline newline
 \end_inset
 
+MPI implementation
+\begin_inset Newline newline
+\end_inset
+
 Pairwise clustering approach
 \begin_inset Newline newline
 \end_inset
@@ -491,6 +495,105 @@ Multi-modal approaches
 
 \begin_layout Section*
 Progress to Date min 0.25
+\end_layout
+
+\begin_layout Subsubsection*
+Global Tractography
+\end_layout
+
+\begin_layout Standard
+We have developed a flexible Markov Random Field model for automatic global
+ tractography.
+ It takes into account how well connections are aligned with the data, incorpora
+tes penalties on the fiber curvature and a prior on the fiber topology.
+ It can resolve difficult fiber geometries such as crossings, even from
+ simple unimodal diffusion tensor data.
+ Extensions that enable adaptive placement of support points are being developed.
+ For optimization we implemented and fine-tuned a Gibbs sampling procedure.
+ The results of the tracking are exported in the .trk format which can be
+ used by third party visualization applications.
+ For performance reasons the code was written in the C language and optimized
+ appropriately.
+ This way the single-threaded runtime is no more than a few hours (up to
+ 2-3x less for common multithread cores).
+ We also experimented with a GPU implementation in CUDA, but found that
+ the problem was too irregular in the sense that control flow and memory
+ access are data-dependent so that an efficient GPU implementation is very
+ hard.
+ For this reason an MPI-based cluster solution was built that achieves up
+ to 30x speedup compared to a single thread.
+\end_layout
+
+\begin_layout Subsubsection*
+Embedding & clustering of brain networks
+\end_layout
+
+\begin_layout Standard
+We are performing clustering on brain images by using the results of tractograph
+y.
+ In order to do that we embed each brain network using an approach based
+ on the trace of differential operators 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Graph clustering: Schrödinger Operator"
+
+\end_inset
+
+.
+ This trace is a vector with much lower dimension than the original brain
+ image but it preserves information about the topology of the underlying
+ graph, that is fiber connections.
+ The idea is that the global brain white matter network changes in response
+ to neurological diseases - current experiments are to show if this approach
+ is sensitive enough to differentiate between different subtypes of e.g.
+ Parkinson disease.
+ First tests on synthetic graph data showed that it is possible to make
+ distinctions between graph topologies (e.g.
+ Random graph vs.
+ Scale free graph) but also inside a certain topology (e.g.
+ Random graphs with different p values).
+\end_layout
+
+\begin_layout Subsubsection*
+Dementia Prediction
+\end_layout
+
+\begin_layout Standard
+We have established first baselines for the classification of elderly people
+ into cognitively stable vs.
+ progressive from their T1 structural MRI scans only.
+ For this we applied classical machine learning approaches such as a combination
+ of Fisher score and SVM, SpaceNet 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "SpaceNet"
+
+\end_inset
+
+ or LeCun's LeNet on PCA reduced brain images.
+ All these approaches manage well on the discrimination of male vs.
+ female, but perform poorly on the stable vs.
+ progressive.
+ The main reasons are the subtlety of the group difference, the comparatively
+ low sensitivity of T1 measurements and the risk of overfitting.
+ Consequently, we plan to consider other MRI modalities (dMRI, ASL, fMRI,
+ SW) and their combinations and incorporate regularization techniques used
+ in the context of deep learning.
+\begin_inset Newline newline
+\end_inset
+
+A different approach based on stacked generalization 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Stacked Generalization"
+
+\end_inset
+
+ applied to local patches of the brain images is being developed in parallel.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -560,6 +663,235 @@ key "knowledge/data intensity"
 
  AI in medicine on its way from knowledge-intensive to data-intensive systems,
  Horn 2001
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "2"
+key "Marras: Parkinson Subtypes"
+
+\end_inset
+
+ Parkinson’s disease subtypes: lost in translation?, Marras 2015
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "3"
+key "Feis: Symptom Side"
+
+\end_inset
+
+ Classification of symptom side predominance Parkinson, Feis 2015
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "4"
+key "Feis: Post Surgery"
+
+\end_inset
+
+ Prediction of post-surgical seizure outcome in left mesial temporal lobe
+ epilepsy, Feis 2013
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "5"
+key "Feis: Gender"
+
+\end_inset
+
+ Decoding gender dimorphism of the human brain using multimodal anatomical
+ and diffusion MRI data, Feis 2013
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "6"
+key "Frindel: Global Tractography"
+
+\end_inset
+
+ A Graph-Based Approach for Automatic Cardiac Tractography, Frindel 2010
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "7"
+key "Mangin: Global Tractography Review"
+
+\end_inset
+
+ Toward global tractography, Mangin 2013
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "8"
+key "Reisert: Global Tractography"
+
+\end_inset
+
+ Global fiber reconstruction becomes practical, Reisert 2011
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "9"
+key "Fillard: Global Tractography"
+
+\end_inset
+
+A Novel Global Tractography Algorithm Based on an Adaptive Spin Glass Model,
+ Fillard 2009
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "10"
+key "Haller: Arterial Spin Labeling"
+
+\end_inset
+
+Arterial spin labeling May contribute to the Prediction of cognitive Deteriorati
+on in healthy elderly individuals, Aikaterini Xekardaki 2015
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "11"
+key "Network measures"
+
+\end_inset
+
+ Complex network measures of brain connectivity: Uses and interpretations,
+ Rubinov 2010
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "12"
+key "Graph clustering: Schrödinger Operator"
+
+\end_inset
+
+ Graph Characteristics from the Schrödinger Operator, Suau 2013
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "13"
+key "Bastiani: Tractography/network measures"
+
+\end_inset
+
+ Human cortical connectome reconstruction from diffusion weighted MRI: The
+ effect of tractography algorithm
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "14"
+key "DeepLearning: Alzheimer"
+
+\end_inset
+
+ Predicting Alzheimer’s disease: a neuroimaging study with 3D convolutional
+ neural networks, Payan 2015
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "15"
+key "DeepLearning Represention Review"
+
+\end_inset
+
+ Representation Learning: A Review and New Perspectives, Bengio 2014
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "16"
+key "SpaceNet"
+
+\end_inset
+
+SpaceNet: Multivariate brain decoding and segmentation, Dohmatob 2015
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "17"
+key "Stacked Generalization"
+
+\end_inset
+
+ Stacked Generalization, Wolpert 1992
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-10"
+
+\end_inset
+
+from state of the art section, key papers, max 1 page
+\end_layout
+
+\begin_layout Standard
+** Parkinson desease subtypes
+\end_layout
+
+\begin_layout Standard
+* tensor papers? orientation distribution function
+\end_layout
+
+\begin_layout Standard
+* tracking papers (global + others) behrens, multidirectional?
+\end_layout
+
+\begin_layout Standard
+* network papers (phd thesis marc)
+\end_layout
+
+\begin_layout Standard
+* multiview/multimodal MRI
+\end_layout
+
+\begin_layout Standard
+* multivariate MRI
+\end_layout
+
+\begin_layout Standard
+* combo clinical + MRI data (Lisa Feis!)
+\end_layout
+
+\begin_layout Standard
+* ASC papers
+\end_layout
+
+\begin_layout Standard
+*references from nico
 \end_layout
 
 \begin_layout Section*
