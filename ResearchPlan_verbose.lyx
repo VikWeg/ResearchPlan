@@ -74,7 +74,7 @@
 \begin_body
 
 \begin_layout Title
-Titel
+Leveraging Machine Learning for MRI analysis in Neurology 
 \end_layout
 
 \begin_layout Author
@@ -217,10 +217,16 @@ The personalization of medicine is strongly driven by recent advancements
 \end_inset
 
 
-\begin_inset Newline newline
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+area of research, main goals, expected contributions
+\end_layout
+
 \end_inset
 
-area of research, main goals, expected contributions
+
 \end_layout
 
 \begin_layout Standard
@@ -293,9 +299,10 @@ on of individual manifestations.
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\begin_inset Note Note
+status open
 
+\begin_layout Plain Layout
 performance computing
 \begin_inset Newline newline
 \end_inset
@@ -315,15 +322,61 @@ sortenreine kohorten für studien
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 general methods, kind of outcomes, field of research&issues
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
 State-of-the-Art min 1
 \end_layout
 
+\begin_layout Paragraph
+Global tractography
+\end_layout
+
+\begin_layout Paragraph
+Clustering of networks
+\end_layout
+
+\begin_layout Paragraph
+Representation learning
+\end_layout
+
+\begin_layout Paragraph
+Dementia prediction
+\end_layout
+
 \begin_layout Standard
+bkadnfe
+\end_layout
+
+\begin_layout Paragraph*
+Performance Computing
+\end_layout
+
+\begin_layout Standard
+Among several factors, the breakthrough of machine learning has critically
+ depended on the availability of fast multi- and many-core processors as
+ well as code that optimally utilizes the computational ressources.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 current approaches restricted to group wise (average), voxelwise analysis
  (Haller)
 \begin_inset Newline newline
@@ -369,56 +422,12 @@ previous & related work, significance, challenges, main concepts, key papers,
  show background knowledge
 \end_layout
 
-\begin_layout Section*
-Goals of the Thesis min 1
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-research questions, methods, contributions
-\begin_inset Newline newline
-\end_inset
-
-state general goals first, work down from there (layering)
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-(connectivity) model based ML
-\begin_inset Newline newline
-\end_inset
-
-model based approach -> interpretability
-\begin_inset Newline newline
-\end_inset
-
-introduce ML into neuro medicine community, ML not established yet
-\begin_inset Newline newline
-\end_inset
-
-Combo clinical data + MRI image data
-\begin_inset Newline newline
-\end_inset
-
-multimodal MRI
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-global tracking
-\begin_inset Newline newline
-\end_inset
-
-ASC + MRFs
-\begin_inset Newline newline
-\end_inset
-
-
 \begin_inset Newpage pagebreak
 \end_inset
 
@@ -426,7 +435,7 @@ ASC + MRFs
 \end_layout
 
 \begin_layout Section*
-Detailed Work Plan min 0.5
+Goals of the Thesis min 1
 \end_layout
 
 \begin_layout Paragraph
@@ -504,11 +513,16 @@ key "Graph clustering: Schrödinger Operator"
 nts, turning the initial conditions into tunable parameters in a classification
  setting and manipulation of the LaPlacian matrix (e.g.
  powers, SVD,...).
+ Apart from the methodological work, we will evaluate the performance of
+ the original and extended approach on real brain networks.
 \end_layout
 
 \begin_layout Standard
-Apart from the methodological work, we will evaluate the performance of
- the original and extended approach on real brain networks.
+The differential operator approach to graph embedding is quite particular,
+ so that we will also consider more general neural network methods which
+ learn the representation directly from the data (such as autoencoders or
+ Restricted Boltzmann Machines, in combination with convolutional network
+ layouts).
 \end_layout
 
 \begin_layout Paragraph
@@ -516,10 +530,204 @@ Dementia Prediction
 \end_layout
 
 \begin_layout Standard
+Having established first baselines, we aim to apply a more sophisticated
+ deep learning model.
+ Due to the image nature of our input we will use a convolutional architecture
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ConvNets"
+
+\end_inset
+
+ which has seen great success in image classification 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Deep Conv nets Image Net"
+
+\end_inset
+
+.
+ So far the great majority of applications thereof involve two-dimensional
+ images, whereas our contribution will take into account the three-dimensional
+ topology of MRI images.
+ In order to deal with the restricted number of available samples it will
+ be necessary to incorporate and test different regularization techniques
+ such as (structured) sparsity penalties, contractive penalties, label preservin
+g transformations, dropout, unsupervised pretraining, etc.
+ This way we hope to develop an automatic diagnosis tool that involves as
+ little human processing as possible.
+ Another aspect is the availability of several MRI 
+\begin_inset Quotes eld
+\end_inset
+
+channels
+\begin_inset Quotes erd
+\end_inset
+
+, i.e.
+ different imaging modalities applied to the same patient.
+ We will investigate how multiple views can be combined beneficially in
+ the deep learning framework.
+\end_layout
+
+\begin_layout Paragraph*
+Performance Computing
+\end_layout
+
+\begin_layout Standard
+Achieving the above goals and their practical deployment requires efficient
+ software implementation and the use of special purpose hardware.
+ We want to take this into account when building our systems, especially
+ also for the reason that there are excellent computing ressources available.
+ Our global tractography solution will run on the Brutus/Euler compute clusters
+ of ETH Zurich using customized MPI code.
+ In the short term, our group will acquire a small GPU cluster which we
+ plan to make use of for our deep learning solutions.
+ Apart from exploiting tools from performance computing for machine learning
+ applications in MRI analysis we also want to enhance our group's practical
+ expertise in implementing algorithms on state-of-the-art hardware.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+research questions, methods, contributions
+\begin_inset Newline newline
+\end_inset
+
+state general goals first, work down from there (layering)
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+(connectivity) model based ML
+\begin_inset Newline newline
+\end_inset
+
+model based approach -> interpretability
+\begin_inset Newline newline
+\end_inset
+
+introduce ML into neuro medicine community, ML not established yet
+\begin_inset Newline newline
+\end_inset
+
+Combo clinical data + MRI image data
+\begin_inset Newline newline
+\end_inset
+
+multimodal MRI
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+global tracking
+\begin_inset Newline newline
+\end_inset
+
+ASC + MRFs
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Detailed Work Plan min 0.5
+\end_layout
+
+\begin_layout Standard
+This thesis started in October 2014 and is planned to finish beginning 2019.
+\end_layout
+
+\begin_layout Paragraph
+Adaptive Global Tractography: 3 months
+\end_layout
+
+\begin_layout Standard
+Formulation & implementation of adaptive model as described in goals.
+\end_layout
+
+\begin_layout Paragraph
+Extensions Global Tractography: 6 months
+\end_layout
+
+\begin_layout Standard
+Integration of orientation distribution functions into adaptive model.
+ Use of higher order potentials and information across length scales.
+ Combination of established model and pairwise clustering approach to bundle
+ segmentation.
+\end_layout
+
+\begin_layout Paragraph
+Clustering of brain networks: 3 months
+\end_layout
+
+\begin_layout Standard
+Tune the established pipeline diffusion MRI data 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ tractography 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ network extraction 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ network embedding, including the suggested modifications.
+ Test of the pipeline on entire brain image data set and evaluate results.
+\end_layout
+
+\begin_layout Paragraph
+Representation learning of brain MRI: 12 months
+\end_layout
+
+\begin_layout Standard
+Implement and customize deep learning approaches to feature extraction and
+ clustering in the setting of brain MRI and neurological diseases.
+ Tentative approaches include RBMs and autoencoders.
+\end_layout
+
+\begin_layout Paragraph
+Dementia Prediction: 12 months
+\end_layout
+
+\begin_layout Standard
+Finish up baseline approaches including stacked generalization and out-of-box
+ deep learning.
+ Implement three-dimensional convolutional neural network and proper regularizat
+ion.
+ Incorporate several available MRI modalities for prediction.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace 1.5cm
+\end_inset
+
 
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 work packages, 3-12 months each, task+outcomes
 \begin_inset Newline newline
 \end_inset
@@ -581,7 +789,58 @@ Stacked+patched generalization
 \end_inset
 
 Multi-modal approaches
-\begin_inset Newline newline
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename TimeSchedule.png
+	scale 75
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Tentative time schedule.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Schedule min 0.25
+\end_layout
+
+\begin_layout Plain Layout
+start of phd, all work packages, excpected dates, finish of thesis, incl
+ writing up
+\end_layout
+
 \end_inset
 
 
@@ -675,9 +934,9 @@ key "SpaceNet"
  progressive.
  The main reasons are the subtlety of the group difference, the comparatively
  low sensitivity of T1 measurements and the risk of overfitting.
- Consequently, we plan to consider other MRI modalities (dMRI, ASL, fMRI,
- SW) and their combinations and incorporate regularization techniques used
- in the context of deep learning.
+ Consequently, we are considering other MRI modalities (dMRI, ASL, fMRI,
+ SW) and their combinations and incorporating regularization techniques
+ used in the context of deep learning.
 \begin_inset Newline newline
 \end_inset
 
@@ -696,16 +955,20 @@ key "Stacked Generalization"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 relate to work plan, preliminary results
 \end_layout
 
-\begin_layout Section*
-Schedule min 0.25
-\end_layout
+\end_inset
 
-\begin_layout Standard
-start of phd, all work packages, excpected dates, finish of thesis, incl
- writing up
+
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
@@ -935,78 +1198,111 @@ key "DiffTensor"
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-11"
+label "20"
+key "ConvNets"
 
 \end_inset
 
+ Gradient-Based Learning Applied to Document Recognition, LeCun 1998
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "21"
+key "Deep Conv nets Image Net"
+
+\end_inset
+
+ ImageNet Classification with Deep Convolutional Neural Networks, Hinton
+ 2012
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 from state of the art section, key papers, max 1 page
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 ** Parkinson desease subtypes
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 * tensor papers? orientation distribution function
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 * tracking papers (global + others) behrens, multidirectional?
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 * network papers (phd thesis marc)
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 * multiview/multimodal MRI
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 * multivariate MRI
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 * combo clinical + MRI data (Lisa Feis!)
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 * ASC papers
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 *references from nico
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
 Study Plan
 \end_layout
 
-\begin_layout Standard
-Past:
+\begin_layout Paragraph
+Acquired
 \end_layout
 
-\begin_layout Standard
-2014 HS, Machine Learning, 6 KP
+\begin_layout Itemize
+Machine Learning 2014/15, 6 KP
 \end_layout
 
-\begin_layout Standard
-2015 FS, How to write fast numerical code, 6 KP
+\begin_layout Itemize
+How to write fast numerical code 2015, 6 KP
 \end_layout
 
-\begin_layout Standard
-2015 FS, Machine Learning Summer School Tübingen 2015, two weeks
-\begin_inset Newline newline
-\end_inset
-
-Future: (overcomplete list, suggestions)
+\begin_layout Itemize
+ML Summer School Tübingen 2015, two weeks
 \end_layout
 
-\begin_layout Standard
-Software Design 6 KP
+\begin_layout Paragraph*
+Tentative
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
+Software Design 2016, 6 KP
+\end_layout
+
+\begin_layout Itemize
 Design of Parallel and High-Performance Computing, 7 KP
 \end_layout
 
@@ -1014,13 +1310,46 @@ Design of Parallel and High-Performance Computing, 7 KP
 Teaching Duties
 \end_layout
 
-\begin_layout Standard
-past, current, future
+\begin_layout Paragraph*
+Past
 \end_layout
 
-\begin_layout Standard
-Machine learning 2015/16, CIL project evaluations 2015, SLT 2016, Department
- Evaluation, Student supervision (4 spring 2016), 
+\begin_layout Itemize
+Machine Learning 2015: tutorials, exercises, exam preparation + correction.
+\end_layout
+
+\begin_layout Itemize
+Computational Intelligence 2015: project evaluations
+\end_layout
+
+\begin_layout Itemize
+Department Evaluation November 2015: poster design, material for display
+ (videos, images)
+\end_layout
+
+\begin_layout Paragraph*
+Current
+\end_layout
+
+\begin_layout Itemize
+Statistical Learning Theory: revision of exam, tutorials & exercises + introduct
+ion of projects
+\end_layout
+
+\begin_layout Itemize
+Student thesis supervision: two bachelor theses + two semester theses
+\end_layout
+
+\begin_layout Paragraph*
+Future
+\end_layout
+
+\begin_layout Itemize
+Machine Learning, Statistical Learning Theory, Learning & Intelligent Systems
+\end_layout
+
+\begin_layout Itemize
+Student supervision
 \end_layout
 
 \end_body
