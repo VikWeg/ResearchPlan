@@ -346,8 +346,98 @@ State-of-the-Art min 1
 Global tractography
 \end_layout
 
+\begin_layout Standard
+Approaches to the reconstruction of fiber connections from local diffusion
+ MRI measurements generally fall into two classes, local and global 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Reisert: Global Tractography"
+
+\end_inset
+
+.
+ Whereas the first proceeds stepwise along locally good directions, the
+ latter tries to optimize a global measure-of-fit over the entire volume
+ in consideration.
+ Global methods are more robust to noise and low resolution and achieve
+ better reconstruction results 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Mangin: Global Tractography Review"
+
+\end_inset
+
+.
+ On the downside, they tend to be computationally expensive as they typically
+ involve difficult combinatorial optimization problems.
+ Here it helps to take into account that interactions are mainly restricted
+ to neighboring voxels, which reduces the complexity of the problem considerably.
+ Formally, this is called a Markov Random Field model which has been used
+ successfully in previous approaches 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Frindel: Global Tractography,Fillard: Global Tractography"
+
+\end_inset
+
+.
+ However, the proposed models either lack flexibility 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Frindel: Global Tractography"
+
+\end_inset
+
+ or they are difficult to implement efficiently 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Fillard: Global Tractography"
+
+\end_inset
+
+.
+ Nevertheless, global tractography is finding its way into practice where
+ it is becoming part of common medical imaging tool boxes 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MITK global tractography"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Paragraph
 Clustering of networks
+\end_layout
+
+\begin_layout Standard
+Apart from applications in neuroscience and image-guided surgery, tractography
+ can serve as a tool to extract meaningful features from brain MRI.
+ It is known that the integrity of white matter is affected by degenerative
+ neurological diseases such as parkinson.
+ This means that disease related features are reflected in the white matter
+ connectivity probed by diffusion MRI.
+ Brain network features are very informative to neurologists and can also
+ be used in machine learning tasks such as finding different brain network
+ subtypes among a group of patients.
+ The question of finding disease subtypes is a of great significance for
+ personalized treatment as well as for clinical studies that require cleanly
+ separated cohorts, e.g.
+ as in Parkinson's disease 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Marras: Parkinson Subtypes"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The question of grouping a set of networks has been studied extensively
+ in the field of structural pattern recognition.
+ There are 
 \end_layout
 
 \begin_layout Paragraph
@@ -374,7 +464,7 @@ Among several factors, the breakthrough of machine learning has critically
 
 \begin_layout Standard
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
 current approaches restricted to group wise (average), voxelwise analysis
@@ -717,6 +807,13 @@ ion.
 \end_layout
 
 \begin_layout Standard
+\begin_inset VSpace 1.5cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status collapsed
 
@@ -797,9 +894,10 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename TimeSchedule.png
-	scale 60
+	scale 75
 
 \end_inset
 
@@ -807,7 +905,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
+Tentative time schedule.
 \end_layout
 
 \end_inset
@@ -847,7 +945,7 @@ Progress to Date min 0.25
 \end_layout
 
 \begin_layout Subsubsection*
-Global Tractography
+Global Tractographyould
 \end_layout
 
 \begin_layout Standard
@@ -1208,6 +1306,29 @@ key "Deep Conv nets Image Net"
 
  ImageNet Classification with Deep Convolutional Neural Networks, Hinton
  2012
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "22"
+key "MITK global tractography"
+
+\end_inset
+
+ MITK Global Tractography, Neher 2012
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "23"
+key "Graph Clustering"
+
+\end_inset
+
+ A Comparison between Structural and Embedding Methods for Graph Classification,
+ Sole-Ribalta 2012
 \end_layout
 
 \begin_layout Standard
